@@ -1,0 +1,14 @@
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+# Install necessary packages
+
+apt-get update > /dev/null 2>&1 && apt-get install -y lsb-release iputils-ping wget > /dev/null 2>&1
+
+# Allow login to admin panel
+
+echo root:"$PASSWORD" | chpasswd
+
+# Create user
+
+adduser --disabled-login --gecos "" emps > /dev/null 2>&1
