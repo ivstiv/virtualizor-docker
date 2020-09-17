@@ -13,6 +13,6 @@ COPY s6/ /etc
 
 # Add necessary packages
 
-RUN apt-get update > /dev/null 2>&1 && apt install -y tzdata > /dev/null 2>&1
+RUN apt-get update > /dev/null 2>&1 && apt install -y tzdata lsb-release iputils-ping wget > /dev/null 2>&1
 
 ENTRYPOINT ["/init"]

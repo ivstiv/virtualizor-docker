@@ -54,3 +54,22 @@ If you see this you can login to your admin panel, if not check your variables.
 Windows and OS X platforms does not have `/etc/localtime` to retrieve timezone information, so you need to add a `-e TZ=Europe/Amsterdam` variable to your docker command and remove `-v /etc/localtime:/etc/localtime:ro \`. 
 
 [List of Time Zones here](https://timezonedb.com/time-zones)
+
+
+sudo docker build -t virtualizor .
+sudo docker start virtualizor
+sudo docker stop virtualizor
+sudo docker logs virtualizor
+sudo rm -rf /opt/virtualizor/*
+
+sudo docker create \
+--name virtualizor \
+-p 4084:4084 \
+-p 4085:4085 \
+-e PUID=0 \
+-e PGID=0 \
+-e PASSWORD=pass \
+-e EMAIL=email@email.asd \
+-v /etc/localtime:/etc/localtime:ro \
+-v /opt/virtualizor:/usr/local/emps/ \
+virtualizor
