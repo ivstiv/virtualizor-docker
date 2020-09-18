@@ -8,14 +8,14 @@
 #H#   sh virtualizor.sh reinstall
 #H#
 #H# Options:
-#H#   start     Starts the container / installs it on the first run
+#H#   start     Starts the container
 #H#   stop      Stops the container
 #H#   install   Creates a container and runs the installation script
 #H#   reinstall Deletes all panel data and installs a fresh panel
+#H#   uninstall Completely removes all traces of virtualizor
 #H#   build     Rebuilds the image
 #H#   shell     Starts a shell inside the panel's container
-#H#   help      Shows this message.
-#H#   backup <backup_directory>     Takes a backup of the whole container
+#H#   help      Shows this message
 
 help() {
     sed -rn 's/^#H# ?//;T;p' "$0"
@@ -87,6 +87,26 @@ elif [ "$1" = "install" ]; then
     [ "$?" -eq 1 ] && exit 1;
     docker start -a virtualizor
 
+elif [ "$1" = "reinstall" ]; then
+
+    while true; do
+        printf "This will delete all data of the current installation! Do you want to proceed? (yes/no):"
+        read -r yn
+        case $yn in
+            [Yy]* ) break;;
+            [Nn]* ) exit 0;;
+            * ) echo "Please answer yes or no.";;
+        esac
+    done
+    echo "Stopping container..."
+    docker stop virtualizor
+    echo "Deleting container..."
+    docker rm virtualizor
+    echo "Deleting contents of $PANEL_DIR ..."
+    rm -rf "$PANEL_DIR"
+    echo "Installing Virtualizor:"
+    sh "$0" install
+
 elif [ "$1" = "start" ]; then
 
     docker start virtualizor
@@ -99,5 +119,9 @@ elif [ "$1" = "stop" ]; then
     docker stop virtualizor
     [ "$?" -eq 1 ] && exit 1;
     echo "Container has been stopped."
+
+elif [ "$1" = "shell" ]; then
+
+    docker exec -it virtualizor bash
 
 fi
