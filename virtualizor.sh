@@ -107,6 +107,27 @@ elif [ "$1" = "reinstall" ]; then
     echo "Installing Virtualizor:"
     sh "$0" install
 
+elif [ "$1" = "uninstall" ]; then
+
+    while true; do
+        printf "This will delete all data of the current installation! Do you want to proceed? (yes/no):"
+        read -r yn
+        case $yn in
+            [Yy]* ) break;;
+            [Nn]* ) exit 0;;
+            * ) echo "Please answer yes or no.";;
+        esac
+    done
+
+    echo "Stopping container..."
+    docker stop virtualizor
+    echo "Deleting container..."
+    docker rm virtualizor
+    echo "Deleting contents of $PANEL_DIR ..."
+    rm -rf "$PANEL_DIR"
+    echo "Deleting image..."
+    docker rmi virtualizor
+
 elif [ "$1" = "start" ]; then
 
     docker start virtualizor
