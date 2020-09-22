@@ -6,8 +6,10 @@ Virtualizor is a powerful web based VPS Control Panel which a user can deploy an
 ## Config Parameters
 
 ```
-HTTP_PORT=4084               # HTTP port on the host (recommended 80)
-HTTPS_PORT=4085              # HTTPS port on the host (recommended 443)
+USER_HTTP_PORT=4082          # User panel http
+USER_HTTPS_PORT=4083         # User panel https
+ADMIN_HTTP_PORT=4084         # Admin panel http
+ADMIN_HTTPS_PORT=4085        # Admin panel https
 PUID=1000                    # User ID
 PGID=1000                    # Group ID
 EMAIL=your@email.here        # Emails will be sent from this email

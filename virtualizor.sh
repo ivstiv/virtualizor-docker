@@ -73,8 +73,10 @@ elif [ "$1" = "install" ]; then
 
     docker create \
         --name virtualizor \
-        -p "$HTTP_PORT":4084 \
-        -p "$HTTPS_PORT":4085 \
+        -p "$USER_HTTP_PORT":4082 \
+        -p "$USER_HTTPS_PORT":4083 \
+        -p "$ADMIN_HTTP_PORT":4084 \
+        -p "$ADMIN_HTTPS_PORT":4085 \
         -e "$PUID"=1000 \
         -e "$PGID"=1000 \
         -e PASSWORD="$REPLY" \
