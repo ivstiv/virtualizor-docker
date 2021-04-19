@@ -71,6 +71,10 @@ Options:
   help      Shows this message
 ```
 
+## Docker-Compose
+
+If you would like to use this docker image with docker-compose, there is an example docker-compose.yml in this repository. Simply clone the repository to the folder you would like to store your data and run the command `docker-compose up -d`.
+
 ## Credits & Links
 - This was initially developed as a standalone installation image by [Nottt](https://github.com/Nottt?tab=repositories). I have preserved his license and this was even forked off his repo until he removed it or made it private.
 - [s6-overlay project](https://github.com/just-containers/s6-overlay)

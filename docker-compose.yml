@@ -1,0 +1,21 @@
+version: "3"
+services:
+  virtualizor:
+    build: .
+    restart: unless-stopped
+    environment:
+      - "PUID=1000"
+      - "PGID=1000"
+      - "PASSWORD=changeme"
+      - "EMAIL=youremail@localhost"
+    volumes:
+      - ./data/emps:/usr/local/emps/:rw
+      - ./data/init:/etc/init.d/:rw
+      - ./data/virtualizor:/usr/local/virtualizor/:rw
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+        # "HOST PORT:CONTAINER PORT" Change the container host port if you want to change what ports you are using
+      - "4082:4082"
+      - "4083:4083"
+      - "4084:4084"
+      - "4085:4085"
