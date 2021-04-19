@@ -11,6 +11,12 @@ if [ -d '/usr/local/emps' ]; then
         echo "You can start the panel in the background with: sh virtualizor.sh start"
         echo ""
     else
+        if ! id -u mysql &>/dev/null; then
+            adduser --disabled-login --gecos "" mysql > /dev/null 2>&1
+        fi
+        if ! id -u emps &>/dev/null; then
+            adduser --disabled-login --gecos "" emps > /dev/null 2>&1
+        fi
         /etc/init.d/virtualizor start 2>&1
     fi
 fi
