@@ -84,6 +84,7 @@ elif [ "$1" = "install" ]; then
         -v /etc/localtime:/etc/localtime:ro \
         -v "$PANEL_DIR/data":/usr/local/emps \
         -v "$PANEL_DIR/init":/etc/init.d \
+        -v "$PANEL_DIR/virtualizor":/usr/local/virtualizor \
         virtualizor
 
     [ "$?" -eq 1 ] && exit 1;
