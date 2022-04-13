@@ -106,7 +106,7 @@ elif [ "$1" = "reinstall" ]; then
     echo "Deleting container..."
     docker rm virtualizor
     echo "Deleting contents of $PANEL_DIR ..."
-    rm -rf "$PANEL_DIR"
+    sudo rm -rf "$PANEL_DIR"
     echo "Installing Virtualizor:"
     sh "$0" install
 
