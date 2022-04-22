@@ -5,7 +5,7 @@ if [ -d '/usr/local/emps' ]; then
     if [ -z "$(ls -A /usr/local/emps)" ] || [ -z "$(ls -A /usr/local/virtualizor)" ]; then
         echo root:"$PASSWORD" | chpasswd
         adduser --disabled-login --gecos "" emps > /dev/null 2>&1
-        bash /etc/scripts/install-virtualizor-new.sh
+        bash /etc/scripts/install-virtualizor.sh
         echo ""
         echo "Press CTRL+C to exit the installation."
         echo "You can start the panel in the background with: sh virtualizor.sh start"

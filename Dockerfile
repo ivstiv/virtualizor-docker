@@ -3,7 +3,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG='C.UTF-8' LANGUAGE='C.UTF-8' LC_ALL='C.UTF-8'
 ARG S6_OVERLAY_VERSION=3.1.0.1
 
-RUN apt-get update > /dev/null 2>&1 && apt install -y tzdata lsb-release iputils-ping wget xz-utils > /dev/null 2>&1
+RUN apt-get update > /dev/null 2>&1 && apt-get install -y tzdata lsb-release iputils-ping wget xz-utils > /dev/null 2>&1
 RUN apt-get install -y curl python kpartx gcc openssl unzip sendmail make cron fuse e2fsprogs tar gnupg > /dev/null 2>&1
 
 # Add s6 script

@@ -77,8 +77,8 @@ elif [ "$1" = "install" ]; then
         -p "$USER_HTTPS_PORT":4083 \
         -p "$ADMIN_HTTP_PORT":4084 \
         -p "$ADMIN_HTTPS_PORT":4085 \
-        -e "$PUID"=1000 \
-        -e "$PGID"=1000 \
+        -e PUID="$PUID" \
+        -e PGID="$PGID" \
         -e PASSWORD="$REPLY" \
         -e EMAIL="$EMAIL" \
         -v /etc/localtime:/etc/localtime:ro \
