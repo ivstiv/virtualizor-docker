@@ -12,7 +12,7 @@ ADMIN_HTTPS_PORT=4085        # Admin panel https
 PUID=1000                    # User ID
 PGID=1000                    # Group ID
 EMAIL=your@email.here        # Emails will be sent from this email
-PANEL_DIR=/opt/virtualizor   # Direcotry containing all of the panel's files
+PANEL_DIR=/opt/virtualizor   # Directory containing all of the panel's files
 ```
 
 ## Installation
