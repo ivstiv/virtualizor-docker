@@ -9,6 +9,10 @@ echo " Welcome to Softaculous Virtualizor Installer"
 echo "-----------------------------------------------"
 echo " "
 
+echo "Updating packages..."
+apt update
+apt upgrade -y
+
 # Stop all the services of EMPS if they were there.
 [ -f /usr/local/emps/bin/mysqlctl ] && /usr/local/emps/bin/mysqlctl stop
 [ -f /usr/local/emps/bin/nginxctl ] && /usr/local/emps/bin/nginxctl stop
