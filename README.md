@@ -3,7 +3,7 @@
 Virtualizor is a powerful web based VPS Control Panel which a user can deploy and manage VPS on servers with a single click. This will install the master server from which you can control your slave servers. The virtualizor.sh script provided in the repo can facilitate most if not all actions needed to manage your panel.
 
 [Docker Hub](https://hub.docker.com/r/sonoransoftware/virtualizor-docker)  
-[GitHub Repo](https://github.com/Sonoran-Software/quasar-capacitor-builder)
+[GitHub Repo](https://github.com/Sonoran-Software/virtualizor-docker)
 
 ## Config Parameters
 
