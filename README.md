@@ -7,7 +7,7 @@ Virtualizor is a powerful web based VPS Control Panel which a user can deploy an
 | Maintainer | Repository |
 | :--------: | ---------- |
 | ivstiv | [![Docker Pulls](https://img.shields.io/docker/pulls/ivstiv/virtualizor-docker?logo=docker&logoColor=white&style=for-the-badge)](https://hub.docker.com/r/ivstiv/virtualizor-docker "open on dockerhub") |
-| Sonoran Software | [![Docker Pulls](https://img.shields.io/docker/pulls/ivstiv/virtualizor-docker?logo=docker&logoColor=white&style=for-the-badge)](https://hub.docker.com/r/sonoransoftware/virtualizor-docker "open on dockerhub") |
+| Sonoran Software | [![Docker Pulls](https://img.shields.io/docker/pulls/sonoransoftware/virtualizor-docker?logo=docker&logoColor=white&style=for-the-badge)](https://hub.docker.com/r/sonoransoftware/virtualizor-docker "open on dockerhub") |
 
 ## Config Parameters
 
