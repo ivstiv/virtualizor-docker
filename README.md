@@ -2,8 +2,12 @@
 
 Virtualizor is a powerful web based VPS Control Panel which a user can deploy and manage VPS on servers with a single click. This will install the master server from which you can control your slave servers. The virtualizor.sh script provided in the repo can facilitate most if not all actions needed to manage your panel.
 
-[Docker Hub](https://hub.docker.com/r/sonoransoftware/virtualizor-docker)  
-[GitHub Repo](https://github.com/Sonoran-Software/virtualizor-docker)
+## Pre-built images:
+
+| Maintainer | Repository |
+| :--------: | ---------- |
+| ivstiv | [![Docker Pulls](https://img.shields.io/docker/pulls/ivstiv/virtualizor-docker?logo=docker&logoColor=white&style=for-the-badge)](https://hub.docker.com/r/ivstiv/virtualizor-docker "open on dockerhub") |
+| Sonoran Software | [![Docker Pulls](https://img.shields.io/docker/pulls/ivstiv/virtualizor-docker?logo=docker&logoColor=white&style=for-the-badge)](https://hub.docker.com/r/sonoransoftware/virtualizor-docker "open on dockerhub") |
 
 ## Config Parameters
 
@@ -92,6 +96,15 @@ In order to keep the container packages up to date you would unfortunately have 
 ```
 docker exec -it virtualizor apt-get --allow-unauthenticated update
 docker exec -it virtualizor apt-get upgrade -y
+```
+
+## Pushing an image
+
+```
+docker login
+docker build -t ivstiv/virtualizor-docker:latest .
+docker push ivstiv/virtualizor-docker:latest
+docker logout
 ```
 
 ## Credits & Links

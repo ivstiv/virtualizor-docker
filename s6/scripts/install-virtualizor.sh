@@ -35,7 +35,7 @@ rm -rf /usr/local/virtualizor/EMPS.tar.gz
 # Download and Install Virtualizor
 #----------------------------------
 echo "2) Downloading and Installing Virtualizor"
-echo "Please be patient. This step usually takes a long time. Some warnings are expected."
+echo "Please be patient. This step can take a long time. Some warnings are expected."
 
 # Get our installer
 wget -q --show-progress --progress=bar:force -O /usr/local/virtualizor/install.php $FILEREPO/install.inc
