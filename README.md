@@ -2,6 +2,9 @@
 
 Virtualizor is a powerful web based VPS Control Panel which a user can deploy and manage VPS on servers with a single click. This will install the master server from which you can control your slave servers. The virtualizor.sh script provided in the repo can facilitate most if not all actions needed to manage your panel.
 
+[Docker Hub](https://hub.docker.com/r/sonoransoftware/virtualizor-docker)  
+[GitHub Repo](https://github.com/Sonoran-Software/quasar-capacitor-builder)
+
 ## Config Parameters
 
 ```
@@ -93,7 +96,12 @@ docker exec -it virtualizor apt-get upgrade -y
 
 ## Credits & Links
 
-- This was initially developed as a standalone installation image by [Nottt](https://github.com/Nottt?tab=repositories). I have preserved his license and this was even forked off his repo until he removed it or made it private.
+- This was initially developed as a standalone installation image by [Nottt](https://github.com/Nottt?tab=repositories). Ivstiv has preserved his license and this was even forked off his repo until he removed it or made it private.
 - [s6-overlay project](https://github.com/just-containers/s6-overlay)
 - [Virtualizor home page](https://www.virtualizor.com)
-- If you have any questions you can find me in [my Discord server](https://discord.gg/VMSDGVD).
+- If you have any questions you can find Ivstiv in his [Discord server](https://discord.gg/VMSDGVD).
+- [Sonoran Software Systems LLC](https://sonoran.software) uses Virtualizor day to day for their [VPS server hosting](https://sonoranservers.com/). They provide this repo to publish a docker image on https://hub.docker.com/r/sonoransoftware/virtualizor-docker
+
+[Join our Discord Server](https://Discord.SonoranSoftware.com)
+
+<a href="https://sonoran.software" target="_blank"><img width=25% src="https://sonoransoftware.com/assets/images/logos/logo_blue_grey.png" title="Sonoran Software Website" alt="Sonoran Software Systems"></a>
