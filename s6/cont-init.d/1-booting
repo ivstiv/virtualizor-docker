@@ -8,7 +8,8 @@ if [ -d '/usr/local/emps' ]; then
         bash /etc/scripts/install-virtualizor.sh
         echo ""
         echo "Press CTRL+C to exit the installation."
-        echo "You can start the panel in the background with: sh virtualizor.sh start"
+        echo "You can start the panel in the background with:"
+        echo " - docker start virtualizor" # To-Do : make this container aware
         echo ""
     else
         if ! id -u mysql &>/dev/null; then
