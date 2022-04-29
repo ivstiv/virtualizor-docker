@@ -7,7 +7,7 @@ services:
       - "PUID=1000"
       - "PGID=1000"
       - "PASSWORD=changeme"
-      - "EMAIL=youremail@localhost"
+      - "EMAIL=your@email.here"
     volumes:
       - ./data/emps:/usr/local/emps/:rw
       - ./data/init:/etc/init.d/:rw
