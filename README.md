@@ -1,6 +1,6 @@
 # Virtualizor inside Docker
 
-Virtualizor is a powerful web based VPS Control Panel which a user can deploy and manage VPS on servers with a single click. This will install the master server from which you can control your slave servers. The virtualizor.sh script provided in the repo can facilitate most if not all actions needed to manage your panel.
+Virtualizor is a powerful web based VPS Control Panel which a user can deploy and manage VPS on servers with a single click. This will install the master server from which you can control your slave servers. The virtualizor.sh script provided in the repo can facilitate most if not all actions needed to manage your panel. Alternatively you can use our example docker-compose templates if you are more comfortable with compose.
 
 ## Pre-built images:
 
@@ -86,7 +86,13 @@ Options:
 
 ## Docker-Compose
 
-If you would like to use this docker image with docker-compose, there is an example docker-compose.yml in this repository. Simply clone the repository to the folder you would like to store your data and run the command `docker-compose up -d`.
+### Build locally:
+
+If you would like to use this docker image with docker-compose, there is an example [docker-compose.yml](docker-compose.yml) in this repository. Simply clone the repository to the folder you would like to store your data and run the command `docker-compose up -d`.
+
+### Use prebuilt image:
+
+We provide hosted prebuilt images on Docker Hub, see those [images above](#pre-built-images). You can use the [altered example dockerhub_docker-compose.yml here](dockerhub_docker-compose.yml).
 
 ## Keep it updated
 

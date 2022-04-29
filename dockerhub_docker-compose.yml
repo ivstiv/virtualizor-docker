@@ -1,7 +1,7 @@
 version: "3"
 services:
   virtualizor:
-    build: .
+    image: sonoransoftware/virtualizor-docker
     restart: unless-stopped
     environment:
       - "PUID=1000"

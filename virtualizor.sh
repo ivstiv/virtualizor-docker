@@ -82,9 +82,10 @@ elif [ "$1" = "install" ]; then
         -e PASSWORD="$REPLY" \
         -e EMAIL="$EMAIL" \
         -v /etc/localtime:/etc/localtime:ro \
-        -v "$PANEL_DIR/data":/usr/local/emps \
-        -v "$PANEL_DIR/init":/etc/init.d \
-        -v "$PANEL_DIR/virtualizor":/usr/local/virtualizor \
+        -v "$PANEL_DIR/data/emps":/usr/local/emps \
+        -v "$PANEL_DIR/data/init":/etc/init.d \
+        -v "$PANEL_DIR/data/virtualizor":/usr/local/virtualizor \
+        -v "$PANEL_DIR/data/cron":/etc/cron.d/ \
         virtualizor
 
     [ "$?" -eq 1 ] && exit 1;
