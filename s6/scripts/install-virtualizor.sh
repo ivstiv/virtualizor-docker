@@ -1,90 +1,77 @@
 #!/usr/bin/with-contenv bash
 # shellcheck shell=bash
 
-# Flush the IP Tables
-#iptables -F >> /dev/null 2>&1
-#iptables -P INPUT ACCEPT >> /dev/null 2>&1
-
 FILEREPO=http://files.virtualizor.com
-LOG=/root/virtualizor.log
-
 ARCH=64
-
 
 echo "-----------------------------------------------"
 echo " Welcome to Softaculous Virtualizor Installer"
 echo "-----------------------------------------------"
 echo " "
 
-
-#----------------------------------
-# Install some LIBRARIES
-#----------------------------------
-
-echo "1) Installing Libraries and Dependencies"
-
-echo "1) Installing Libraries and Dependencies" >> $LOG 2>&1
-
-		apt-get update -y >> $LOG 2>&1
-		apt-get install -y kpartx gcc openssl unzip sendmail make cron fuse e2fsprogs >> $LOG 2>&1
-
-#----------------------------------
-# Install PHP, MySQL, Web Server
-#----------------------------------
-
-echo "2) Installing PHP, MySQL and Web Server"
+echo "Updating packages..."
+apt update
+apt upgrade -y
 
 # Stop all the services of EMPS if they were there.
-/usr/local/emps/bin/mysqlctl stop >> $LOG 2>&1
-/usr/local/emps/bin/nginxctl stop >> $LOG 2>&1
-/usr/local/emps/bin/fpmctl stop >> $LOG 2>&1
-
-# Remove the EMPS package
-rm -rf /usr/local/emps/ >> $LOG 2>&1
+[ -f /usr/local/emps/bin/mysqlctl ] && /usr/local/emps/bin/mysqlctl stop
+[ -f /usr/local/emps/bin/nginxctl ] && /usr/local/emps/bin/nginxctl stop
+[ -f /usr/local/emps/bin/fpmctl ] && /usr/local/emps/bin/fpmctl stop
 
 # The necessary folders
-mkdir /usr/local/emps >> $LOG 2>&1
-mkdir /usr/local/virtualizor >> $LOG 2>&1
+[ ! -d /usr/local/emps ] && mkdir /usr/local/emps
+[ ! -d /usr/local/virtualizor ] && mkdir /usr/local/virtualizor
 
-echo "1) Installing PHP, MySQL and Web Server" >> $LOG 2>&1
-wget -N -O /usr/local/virtualizor/EMPS.tar.gz "http://files.softaculous.com/emps.php?arch=$ARCH" >> $LOG 2>&1
+
+echo "1) Installing PHP, MySQL and Web Server"
+wget -q --show-progress --progress=bar:force -O /usr/local/virtualizor/EMPS.tar.gz "http://files.softaculous.com/emps.php?latest=1&arch=$ARCH"
 
 # Extract EMPS
-tar -xvzf /usr/local/virtualizor/EMPS.tar.gz -C /usr/local/emps >> $LOG 2>&1
-rm -rf /usr/local/virtualizor/EMPS.tar.gz >> $LOG 2>&1
+tar -xvzf /usr/local/virtualizor/EMPS.tar.gz -C /usr/local/emps
+rm -rf /usr/local/virtualizor/EMPS.tar.gz
+
 
 #----------------------------------
 # Download and Install Virtualizor
 #----------------------------------
-
-echo "3) Downloading and Installing Virtualizor"
-echo "3) Downloading and Installing Virtualizor" >> $LOG 2>&1
+echo "2) Downloading and Installing Virtualizor"
+echo "Please be patient. This step can take a long time. Some warnings are expected."
 
 # Get our installer
-wget -O /usr/local/virtualizor/install.php $FILEREPO/install.inc >> $LOG 2>&1
+wget -q --show-progress --progress=bar:force -O /usr/local/virtualizor/install.php $FILEREPO/install.inc
+
 
 # Run our installer
-/usr/local/emps/bin/php -d zend_extension=/usr/local/emps/lib/php/ioncube_loader_lin_5.3.so /usr/local/virtualizor/install.php master=1 email="$EMAIL"
-rm -rf /usr/local/virtualizor/install.php >> $LOG 2>&1
-rm -rf /usr/local/virtualizor/upgrade.php >> $LOG 2>&1
+/usr/local/emps/bin/php -d zend_extension=/usr/local/emps/lib/php/ioncube_loader_lin_5.3.so /usr/local/virtualizor/install.php email="$EMAIL"
+phpret=$?
+rm -rf /usr/local/virtualizor/install.php
+rm -rf /usr/local/virtualizor/upgrade.php
+
+# Was there an error
+if ! [ $phpret == "8" ]; then
+	echo " "
+	echo "ERROR :"
+	echo "There was an error while installing Virtualizor"
+	echo "Please check /root/virtualizor.log for errors"
+	echo "Exiting Installer"	
+ 	exit 1;
+fi
 
 # Fix permissions
-
-groupmod -o -g "$PGID" emps > /dev/null 2>&1
-usermod -o -u "$PUID" emps > /dev/null 2>&1
-groupmod -o -g "$PGID" mysql > /dev/null 2>&1
-usermod -o -u "$PUID" mysql > /dev/null 2>&1
+groupmod -o -g "$PGID" emps
+usermod -o -u "$PUID" emps
+groupmod -o -g "$PGID" mysql
+usermod -o -u "$PUID" mysql
 
 chown -R emps:emps /usr/local/emps/
 
 #----------------------------------
 # Starting Virtualizor Services
 #----------------------------------
+echo "Starting Virtualizor Services"
+/etc/init.d/virtualizor restart
 
-echo "Starting Virtualizor Services" >> $LOG 2>&1
-/etc/init.d/virtualizor restart >> $LOG 2>&1
-
-wget -O /tmp/ip.php http://softaculous.com/ip.php >> $LOG 2>&1 
+wget -O /tmp/ip.php http://softaculous.com/ip.php
 ip=$(cat /tmp/ip.php)
 rm -rf /tmp/ip.php
 
