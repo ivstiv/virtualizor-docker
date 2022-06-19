@@ -1,9 +1,10 @@
 #!/usr/bin/with-contenv bash
 # shellcheck shell=bash
 
+echo root:"$PASSWORD" | chpasswd
+
 if [ -d '/usr/local/emps' ]; then
     if [ -z "$(ls -A /usr/local/emps)" ] || [ -z "$(ls -A /usr/local/virtualizor)" ]; then
-        echo root:"$PASSWORD" | chpasswd
         adduser --disabled-login --gecos "" emps > /dev/null 2>&1
         bash /etc/scripts/install-virtualizor.sh
         echo ""
