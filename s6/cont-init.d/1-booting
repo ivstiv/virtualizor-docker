@@ -10,8 +10,11 @@ if [ -d '/usr/local/emps' ]; then
         echo "Press CTRL+C to exit the installation."
         echo "You can start the panel in the background with:"
         echo " - docker start virtualizor" # To-Do : make this container aware
+        echo "If using this container with docker-compose please restart the container now with:"
+        echo " - docker-compose restart"
         echo ""
     else
+        echo root:"$PASSWORD" | chpasswd
         if ! id -u mysql &>/dev/null; then
             adduser --disabled-login --gecos "" mysql > /dev/null 2>&1
         fi
