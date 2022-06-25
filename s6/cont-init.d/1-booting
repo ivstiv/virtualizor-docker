@@ -1,6 +1,11 @@
 #!/usr/bin/with-contenv bash
 # shellcheck shell=bash
 
+# Cron Directory Permission fix at boot time
+# Cron files in the cron.d directory will not run if group/other has write perms or root is not the owner.
+chmod 644 /etc/cron.d/*
+chown root:root /etc/cron.d/*
+
 if [ -d '/usr/local/emps' ]; then
     if [ -z "$(ls -A /usr/local/emps)" ] || [ -z "$(ls -A /usr/local/virtualizor)" ]; then
         echo root:"$PASSWORD" | chpasswd
