@@ -18,5 +18,5 @@ services:
         # "HOST PORT:CONTAINER PORT" Change the container host port if you want to change what ports you are using
       - "4082:4082"
       - "4083:4083"
-      - "4084:4084"
-      - "4085:4085"
+      - "80:4084"
+      - "443:4085"
