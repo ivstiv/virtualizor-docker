@@ -107,9 +107,11 @@ docker exec -it virtualizor apt-get upgrade -y
 ## Pushing an image
 
 ```
+VERSION=$(date +'%Y-%m-%d')-1
 docker login
-docker build -t ivstiv/virtualizor-docker:latest .
+docker build -t ivstiv/virtualizor-docker:latest -t "ivstiv/virtualizor-docker:$VERSION" . --load
 docker push ivstiv/virtualizor-docker:latest
+docker push "ivstiv/virtualizor-docker:$VERSION"
 docker logout
 ```
 
