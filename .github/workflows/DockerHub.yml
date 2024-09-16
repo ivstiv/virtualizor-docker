@@ -1,34 +1,35 @@
-name: Publish Sonoran Software Docker image
+name: Publish latest docker image
 
 on:
-  push:
-    branches: ['master']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Additional Docker image tag'
+        required: true
 
 jobs:
-  push_to_registry:
-    if: github.repository == 'Sonoran-Software/virtualizor-docker'
-    name: Push Docker image to Docker Hub
+  publish:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
       
-      - name: Log in to Docker Hub
-        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
       
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
-        with:
-          images: sonoransoftware/virtualizor-docker
-      
-      - name: Build and push Docker image
-        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+      - name: Build and push
+        uses: docker/build-push-action@v6
         with:
           context: .
+          sbom: true # https://docs.docker.com/build/ci/github-actions/attestations/
+          provenance: mode=max
           push: true
-          tags: sonoransoftware/virtualizor-docker:latest
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: |
+            ${{ secrets.DOCKER_HUB_USERNAME }}/virtualizor-docker:latest
+            ${{ secrets.DOCKER_HUB_USERNAME }}/virtualizor-docker:${{ github.event.inputs.tag}}

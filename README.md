@@ -109,9 +109,8 @@ docker exec -it virtualizor apt-get upgrade -y
 ```
 VERSION=$(date +'%Y-%m-%d')-1
 docker login
-docker build -t ivstiv/virtualizor-docker:latest -t "ivstiv/virtualizor-docker:$VERSION" . --load
-docker push ivstiv/virtualizor-docker:latest
-docker push "ivstiv/virtualizor-docker:$VERSION"
+docker pull ubuntu:20.04
+docker buildx build --push --provenance=true --sbom=true -t ivstiv/virtualizor-docker:experimental -t "ivstiv/virtualizor-docker:$VERSION" . 
 docker logout
 ```
 
